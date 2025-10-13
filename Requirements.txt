@@ -1,0 +1,5 @@
+rich
+vulners
+nvdlib
+python-nmap
+aiohttp
