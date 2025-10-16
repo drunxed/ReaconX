@@ -1,5 +1,6 @@
 rich
+beautifulsoup4
+requests
 vulners
 nvdlib
-python-nmap
 aiohttp
