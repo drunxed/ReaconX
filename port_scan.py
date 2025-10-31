@@ -14,6 +14,7 @@ from rich.panel import Panel
 from rich.progress import Progress
 import re
 
+# Define Port Scanner class
 class PortScanner:
     def __init__(self, target: str, port_range: Tuple[int, int] = (1, 1024),
                  timeout: float = 1.0, max_workers: int = 100):
@@ -29,6 +30,7 @@ class PortScanner:
         self.scan_start_time: Optional[float] = None
         self.scan_end_time: Optional[float] = None
 
+    # Scan a single port
     def scan_port(self, port: int) -> Dict:
         result = {
             'port': port,
@@ -70,6 +72,7 @@ class PortScanner:
 
         return result
             
+    # Grab banner from open port
     def _grab_banner(self, sock: socket.socket, port: int) -> str:
         banner = ""
         try:
@@ -250,12 +253,12 @@ class PortScanner:
             self.console.print(f"\n[green]Scan completed in {scan_duration:.2f} seconds.[/green]\n")
 
 
-    
+# Call main function for testing
 if __name__ == "__main__":
     target = "scanme.nmap.org"
     if len(sys.argv) >= 2:
         target = sys.argv[1]
-    port_range = (20, 1024)
+    port_range = (1, 1024)
     if len(sys.argv) >= 4:
         port_range = (int(sys.argv[2]), int(sys.argv[3]))
     scanner = PortScanner(target=target, port_range=port_range, timeout=1.0, max_workers=100)

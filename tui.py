@@ -110,9 +110,21 @@ class TUIScanner:
 
     # Run both port and vulnerability scans
     def run_both_scans(self, target: str):
+        # Port Scan Section
+        self.console.print("\n[bold yellow]======= PORT SCAN RESULTS =======[/bold yellow]\n")
         self.run_port_scan(target)
-        self.console.print("=" * 60)  # Separator
-        self.run_vuln_scan(target)
+
+        # Separator
+        self.console.print("\n[bold yellow] ======== VULNERABILITY SCAN RESULTS ======== [/bold yellow]\n")
+
+        # Vulnerability Scan Section
+        try:
+            vuln_scan.main(target)
+        except Exception as e:
+            self.console.print(f"[red]Error during vulnerability scan: {str(e)}[/red]")
+
+        self.console.print("\n[green]Press Enter to return to main menu...[/green]")
+        input()
 
     # Main TUI 
     def run(self):
